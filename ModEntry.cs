@@ -249,10 +249,13 @@ namespace Sprinting
                     {
                         Speed = { Config.SpeedBoost }
                     }
-                );
+                )
+                {
+                    // hide the buff icon so it doesn't flash on/off in the HUD while moving
+                    visible = false
+                };
 
-                Buff buff = Game1.buffsDisplay.GetSortedBuffs().FirstOrDefault(x => x.id == _buffId);
-                if (buff is not null)
+                if (player.buffs.AppliedBuffs.TryGetValue(_buffId, out Buff buff))
                 {
                     buff.millisecondsDuration = 100;
                 }
